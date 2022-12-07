@@ -6,7 +6,7 @@ set $mod Mod4
 
 
 # FONT: ttf-hack-nerd
-font pango: Hack Nerd Font 10
+font pango: monospace 8
 
 
 # LANGUAGE: spanish
@@ -21,9 +21,10 @@ default_border none
 gaps inner 6
 gaps outer 0
 
-# setting screen resolution
-exec xrandr -s 1920x1080
-exec xrandr --fbmm 539x325
+
+# setting screen resolution and dpi
+exec --no-startup-id xrandr -s 1920x1080
+exec --no-startup-id xrandr --fbmm 539x325
 
 # AUTO STARTUP [xdg-autostart, NetworkManager, picom, polybar, nitrogen, dunst, xscreensaver]
 exec --no-startup-id dex --autostart --environment i3
@@ -54,18 +55,13 @@ set $ws10 "10"
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
-# exit
-mode "exit: [l]ogout, [r]eboot, [s]hutdown" {
-	bindsym l exec i3-msg exit
-	bindsym r exec systemctl reboot
-	bindsym s exec systemctl shutdown
+# exit and screenlock: xscreensaver
+mode "exit" {
+	bindsym Return exit
+	bindsym l exec xscreensaver-command --lock
 	bindsym Escape mode "default"
-	bindstm Return mode "default"
 }
-bindsym $mod+Shift+e mode "exit: [l]ogout, [r]eboot, [s]hutdown"
-
-# lock: xscreensaver
-bindsym $mod+l exec xscreensaver-command --lock 
+bindsym $mod+Shift+e mode "exit"
 
 # kill window
 bindsym $mod+Shift+q kill
