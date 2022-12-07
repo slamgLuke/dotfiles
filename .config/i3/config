@@ -25,13 +25,14 @@ gaps outer 0
 exec xrandr -s 1920x1080
 exec xrandr --fbmm 539x325
 
-# AUTO STARTUP [xdg-autostart, NetworkManager, picom, polybar, nitrogen, dunst]
+# AUTO STARTUP [xdg-autostart, NetworkManager, picom, polybar, nitrogen, dunst, xscreensaver]
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id nm-applet
-exec --no-startup-id picom -b
+exec --no-startup-id picom -cb --config ~/.config/picom/picom.conf
 exec --no-startup-id polybar -r
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id /usr/bin/dunst
+exec --no-startup-id xscreensaver --no-splash
 
 
 # Workspace variables
@@ -49,10 +50,22 @@ set $ws10 "10"
 
 # ---- BINDS -----
 
-# reload config file/restart i3/exit i3
+# reload config file/restart i3
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec exit
+
+# exit
+mode "exit: [l]ogout, [r]eboot, [s]hutdown" {
+	bindsym l exec i3-msg exit
+	bindsym r exec systemctl reboot
+	bindsym s exec systemctl shutdown
+	bindsym Escape mode "default"
+	bindstm Return mode "default"
+}
+bindsym $mod+Shift+e mode "exit: [l]ogout, [r]eboot, [s]hutdown"
+
+# lock: xscreensaver
+bindsym $mod+l exec xscreensaver-command --lock 
 
 # kill window
 bindsym $mod+Shift+q kill
@@ -66,6 +79,14 @@ bindsym $mod+d exec "rofi -modi drun,run -show drun"
 
 # screenshot
 bindsym Print exec flameshot gui
+
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 
 # container focus
@@ -139,7 +160,6 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 
 # resize
-bindsym $mod+r mode "resize"
 mode "resize" {
 	bindsym j resize shrink width 10 px or 10 ppt
 	bindsym semicolon resize grow width 10 px or 10 ppt
@@ -156,3 +176,4 @@ mode "resize" {
 	bindsym Escape mode "default"
 	bindsym $mod+r mode "default"
 }
+bindsym $mod+r mode "resize"

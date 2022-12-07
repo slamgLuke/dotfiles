@@ -1,0 +1,11 @@
+! Font
+xscreensaver-auth.default.Dialog.bodyFont: hack nerd font mono 10
+
+lock:           True
+lockTimeout:    0:00:00
+dpmsEnabled:    True
+dpmsQuickOff:   True
+dpmsStandby:    2:00:00
+dpmsSuspend:    2:00:00
+dpmsOff:        4:00:00
+mode:           blank
