@@ -103,15 +103,15 @@ bindsym $mod+a focus parent
 bindsym $mod+f fullscreen toggle
 
 # container movement
-bindsym $mod+Shift+j focus left
-bindsym $mod+Shift+semicolon focus right
-bindsym $mod+Shift+l focus up
-bindsym $mod+Shift+k focus down
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+k move down
 
-bindsym $mod+Shift+Left focus left
-bindsym $mod+Shift+Right focus right
-bindsym $mod+Shift+Up focus up
-bindsym $mod+Shift+Down focus down
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Down move down
 
 # container layout
 bindsym $mod+s layout stacking
