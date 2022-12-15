@@ -6,7 +6,7 @@ set $mod Mod4
 
 
 # FONT: ttf-hack-nerd
-font pango: monospace 8
+font pango:Hack 11
 
 
 # LANGUAGE: spanish
@@ -24,7 +24,8 @@ gaps outer 0
 
 # setting screen resolution and dpi
 exec --no-startup-id xrandr -s 1920x1080
-exec --no-startup-id xrandr --fbmm 539x325
+exec --no-startup-id xrandr --fbmm 539x325     # 24 inch display
+# exec --no-startup-id xrandr --fbmm 307x233   # 14 inch display
 
 # AUTO STARTUP [xdg-autostart, NetworkManager, picom, polybar, nitrogen, dunst, xscreensaver]
 exec --no-startup-id dex --autostart --environment i3
