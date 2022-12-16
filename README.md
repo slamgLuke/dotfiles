@@ -13,6 +13,10 @@ config files for arch linux
 - polybar
 - alacritty
 - flameshot
+- redshift
+- brightnessctl (chmod +x in .config/polybar)
+- ttf-hack-nerd
+- ttf-font-awesome
 
 ## Extra apps
 - vim/nvim
@@ -25,3 +29,4 @@ config files for arch linux
 - pulseaudio
 - alsa & alsa-utils
 - ly
+- ufw
