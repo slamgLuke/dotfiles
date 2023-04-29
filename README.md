@@ -19,14 +19,12 @@ config files for arch linux
 - ttf-font-awesome
 
 ## Extra apps
-- vim/nvim
-- iwctl
-- networkmanager
-- iwtcl
+- vim/neovim
+- networkmanager-iwctl
 - xclip
 - spotifyd & spotify-tui
 - pcmanfm
 - pulseaudio
 - alsa & alsa-utils
 - ly
-- ufw
+- zsh + ohmyzsh
