@@ -4,7 +4,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'dense-analysis/ale'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'itchyny/lightline.vim'
 Plug 'github/copilot.vim'
@@ -76,55 +75,66 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" go to definition
+nmap <silent> gd <Plug>(coc-definition)
+" go to type definition
+nmap <silent> gy <Plug>(coc-type-definition)
+" go to implementation
+nmap <silent> gi <Plug>(coc-implementation)
+" go to references
+nmap <silent> gr <Plug>(coc-references)
+
+
+
 
 " Enable ALE.
-let g:ale_enabled = 1
+"let g:ale_enabled = 1
 
-" Show errors in the gutter.
-" let g:ale_sign_error = '✖'
-"let g:ale_sign_error = '▇'
-let g:ale_sign_error = '>'
-let g:ale_sign_warning = '>'
+"" Show errors in the gutter.
+"" let g:ale_sign_error = '✖'
+""let g:ale_sign_error = '▇'
+"let g:ale_sign_error = '>'
+"let g:ale_sign_warning = '>'
 
-" Show errors in the location list.
-let g:ale_list_window_size = 5
-let g:ale_list_vertical = 1
+"" Show errors in the location list.
+"let g:ale_list_window_size = 5
+"let g:ale_list_vertical = 1
 
-" Enable error highlighting.
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '▇[%linter%] %s (%severity%)'
+"" Enable error highlighting.
+"let g:ale_echo_msg_error_str = 'E'
+"let g:ale_echo_msg_warning_str = 'W'
+"let g:ale_echo_msg_format = '▇[%linter%] %s (%severity%)'
 
-" Set up linters and fixers for different programming languages
-let g:ale_linters = {
-    \ 'c': ['gcc'],
-    \ 'cpp': ['clangd'],
-    \ 'rust': ['analyzer'],
-    \ 'python': ['pylint'],
-    \ 'html': ['tidy'],
-    \ 'php': ['php'],
-    \ 'latex': ['chktex'],
-    \}
+"" Set up linters and fixers for different programming languages
+"let g:ale_linters = {
+    "\ 'c': ['gcc'],
+    "\ 'cpp': ['clangd'],
+    "\ 'rust': ['analyzer'],
+    "\ 'python': ['pylint'],
+    "\ 'html': ['tidy'],
+    "\ 'php': ['php'],
+    "\ 'latex': ['chktex'],
+    "\}
 
-let g:ale_fixers = {
-    \ 'c': ['clang-format'],
-    \ 'cpp': ['clang-tidy'],
-    \ 'rust': ['rustfmt'],
-    \ 'python': ['autopep8'],
-    \ 'html': ['tidy'],
-    \ 'php': ['phpcbf'],
-    \ 'latex': ['latexindent'],
-    \}
+"let g:ale_fixers = {
+    "\ 'c': ['clang-format'],
+    "\ 'cpp': ['clang-tidy'],
+    "\ 'rust': ['rustfmt'],
+    "\ 'python': ['autopep8'],
+    "\ 'html': ['tidy'],
+    "\ 'php': ['phpcbf'],
+    "\ 'latex': ['latexindent'],
+    "\}
 
-let g:ale_c_gcc_options = '-Wall -Wextra -std=c17 -I /usr/include/c++/12.2.1/'
+"let g:ale_c_gcc_options = '-Wall -Wextra -std=c17 -I /usr/include/c++/12.2.1/'
 
-" Set up key mappings for Ale commands
-nnoremap <silent> <leader>l :ALELint<CR>
-nnoremap <silent> <leader>f :ALEFix<CR>
-"
-" Map keys to navigate errors.
-nnoremap <silent> <leader>ne :ALENext<CR>
-nnoremap <silent> <leader>pe :ALEPrevious<CR>
+"" Set up key mappings for Ale commands
+"nnoremap <silent> <leader>l :ALELint<CR>
+"nnoremap <silent> <leader>f :ALEFix<CR>
+""
+"" Map keys to navigate errors.
+"nnoremap <silent> <leader>ne :ALENext<CR>
+"nnoremap <silent> <leader>pe :ALEPrevious<CR>
 
 
 
