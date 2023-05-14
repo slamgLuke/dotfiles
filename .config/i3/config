@@ -6,7 +6,7 @@ set $mod Mod4
 
 
 # FONT: ttf-hack-nerd
-font pango:Hack 11
+font pango:Hack 10
 
 
 # LANGUAGE: spanish
@@ -22,20 +22,31 @@ gaps inner 6
 gaps outer 0
 
 
+# Prevent focus change with mouse
+focus_follows_mouse no
+
 # setting screen resolution and dpi
 exec xrandr -s 1920x1080
-exec xrandr --fbmm 539x325     # 24 inch display
-# exec xrandr --fbmm 307x233   # 14 inch display
+exec xrandr --fbmm 307x223
+
+# changing repeat rate (default 660/25)
+exec xset r rate 300 25
+
 
 # AUTO STARTUP [xdg-autostart, NetworkManager, picom, polybar, nitrogen, dunst, xscreensaver]
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id picom -cb --config ~/.config/picom/picom.conf
 exec --no-startup-id polybar -r
 exec --no-startup-id nitrogen --restore
-exec --no-startup-id /usr/bin/dunst
+exec --no-startup-id dunst
 exec --no-startup-id xscreensaver --no-splash
 exec --no-startup-id redshift -r
 
+# For vscode auto login keychain fix
+exec --no-startup-id dbus-launch
+
+# Custom shell script for lowe battery notification
+exec ~/.config/dunst/battery-notification.sh &
 
 # Workspace variables
 set $ws1 "1"
@@ -88,15 +99,15 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# Brightness control
+# Brightness Control
 bindsym XF86MonBrightnessUp exec brightnessctl s +5%
 bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
 
 # container focus
-bindsym $mod+j focus left
-bindsym $mod+semicolon focus right
-bindsym $mod+l focus up
-bindsym $mod+k focus down
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+bindsym $mod+j focus down
 
 bindsym $mod+Left focus left
 bindsym $mod+Right focus right
@@ -110,10 +121,10 @@ bindsym $mod+a focus parent
 bindsym $mod+f fullscreen toggle
 
 # container movement
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+semicolon move right
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+k move down
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+j move down
 
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Right move right
@@ -126,8 +137,8 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # split
-bindsym $mod+h split h
-bindsym $mod+v split v
+#bindsym $mod+h split h
+#bindsym $mod+v split v
 
 
 # toggle tiling/floating
