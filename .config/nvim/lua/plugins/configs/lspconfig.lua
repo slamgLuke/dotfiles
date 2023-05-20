@@ -66,7 +66,7 @@ lspconfig.lua_ls.setup {
 
 -- CUSTOM
 
--- rust: rust_analyzer
+-- rust: rust_analyzer + rustfmt
 lspconfig.rust_analyzer.setup({
     capabilities = M.capabilities,
     on_attach = M.on_attach,
@@ -80,9 +80,9 @@ lspconfig.clangd.setup({
     on_attach = M.on_attach,
     M.capabilities.offsetEncoding == {"utf16"},
     cmd = {
-        "/usr/bin/clandg",
+        "/home/lucas/.local/share/nvim/mason/packages/clangd/clangd_16.0.2/bin/clangd",
         "-offset-encoding=utf-16",
-    }
+    },
 })
 
 -- python: ruff
@@ -106,15 +106,20 @@ lspconfig.emmet_ls.setup({
     }
 })
 
--- python: ruff
+-- python: ruff + black
 lspconfig.tailwindcss.setup({
     capabilities = M.capabilities,
     on_attach = M.on_attach,
 })
 
-
 -- latex: texlab (lsp) + latexindent (formatter)
 lspconfig.texlab.setup({
+    capabilities = M.capabilities,
+    on_attach = M.on_attach,
+})
+
+-- sql: sqlls + sqlfmt
+lspconfig.sqlls.setup({
     capabilities = M.capabilities,
     on_attach = M.on_attach,
 })
