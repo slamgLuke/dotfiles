@@ -2,7 +2,7 @@
 config files for arch linux
 
 ## Required packages
-- i3 & i3gaps
+- i3
 - jonaburg-picom-git
 - xorg-server
 - xorg-xinit
@@ -10,7 +10,7 @@ config files for arch linux
 - nitrogen
 - rofi
 - dunst
-- polybar
+- polybar (chmod +x to .config/polybar/batterylife.sh)
 - alacritty
 - flameshot
 - redshift
@@ -28,3 +28,9 @@ config files for arch linux
 - alsa & alsa-utils
 - ly
 - zsh + ohmyzsh
+- tmux (Ctrl-Space + I to install)
+- intel-undervolt
+
+## Dont forget
+- rustup (with rust analyzer)
+- +-+-+
