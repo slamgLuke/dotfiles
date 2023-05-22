@@ -19,7 +19,7 @@ config files for arch linux
 - ttf-font-awesome
 
 ## Extra apps
-- vim/neovim
+- nvchad (neovim)
 - networkmanager-iwctl
 - xclip
 - spotifyd & spotify-tui
