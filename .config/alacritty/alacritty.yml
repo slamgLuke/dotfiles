@@ -1,18 +1,17 @@
 # Window Settings:
 window:
   dimensions:
-    columns: 0
-    lines: 0
+    columns: 120
+    lines: 30
 
   position:
-    x: 0
-    y: 0
+    x: 200
+    y: 50
 
   padding:
     x: 0
     y: 0
 
-  decorations: none
   opacity: 0.9
 
 # Scrolling:
@@ -38,7 +37,7 @@ font:
     family: Hack Nerd Font Mono
     style: Bold Italic
 
-  size: 9.0
+  size: 8.0
 
 
 # Theme:

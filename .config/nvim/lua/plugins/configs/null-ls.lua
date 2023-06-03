@@ -10,7 +10,8 @@ local sources = {
     formatting.rustfmt,
     formatting.black,
     formatting.sqlfmt,
-    formatting.clang_format.with({ extra_args = { "--style=LLVM" } }),
+    formatting.clang_format.with({ extra_args = { "-style=file" } }),
+    formatting.prettier,
 }
 
 null_ls.setup {

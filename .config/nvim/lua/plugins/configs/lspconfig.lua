@@ -72,7 +72,26 @@ lspconfig.rust_analyzer.setup({
     on_attach = M.on_attach,
     filetypes = {"rust"},
     root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+    settings = {
+        ["rust-analyzer"] = {
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
+            },
+            cargo = {
+                buildScripts = {
+                    enable = true,
+                },
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    },
 })
+
 
 -- cpp: clangd
 lspconfig.clangd.setup({
@@ -85,13 +104,8 @@ lspconfig.clangd.setup({
     },
 })
 
--- python: ruff
-lspconfig.ruff_lsp.setup({
-    capabilities = M.capabilities,
-    on_attach = M.on_attach,
-})
 
--- webdevel: emmet_ls
+-- webdevel: emmet_ls + rome + tailwindcss + prettier
 lspconfig.emmet_ls.setup({
     capabilities = M.capabilities,
     on_attach = M.on_attach,
@@ -106,11 +120,23 @@ lspconfig.emmet_ls.setup({
     }
 })
 
+lspconfig.rome.setup({
+    capabilities = M.capabilities,
+    on_attach = M.on_attach,
+})
+
+lspconfig.tailwindcss.setup({
+    capabilities = M.capabilities,
+    on_attach = M.on_attach,
+})
+
+
 -- python: ruff + black
 lspconfig.tailwindcss.setup({
     capabilities = M.capabilities,
     on_attach = M.on_attach,
 })
+
 
 -- latex: texlab (lsp) + latexindent (formatter)
 lspconfig.texlab.setup({
@@ -118,7 +144,8 @@ lspconfig.texlab.setup({
     on_attach = M.on_attach,
 })
 
--- sql: sqlls + sqlfmt
+
+-- sql: sqlls
 lspconfig.sqlls.setup({
     capabilities = M.capabilities,
     on_attach = M.on_attach,

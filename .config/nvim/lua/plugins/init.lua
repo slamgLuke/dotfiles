@@ -276,14 +276,18 @@ local default_plugins = {
             -- server list
             ensure_installed = {
                 "lua-language-server",
-                "rust-analyzer",
                 "clangd",
                 "ruff-lsp",
                 "texlab",
                 "emmet-ls",
                 "tailwindcss-language-server",
+                "sqlls",
+                "rome",
                 -- formatters
-                "latex-indent"
+                "latexindent",
+                "black",
+                "clang-format",
+                "prettier"
             },
         },
     },
@@ -297,6 +301,10 @@ local default_plugins = {
     },
     {
         "tpope/vim-surround",
+        lazy = false,
+    },
+    {
+        "lervag/vimtex",
         lazy = false,
     }
 }

@@ -45,9 +45,6 @@ M.general = {
     -- new buffer
     ["<leader>b"] = { "<cmd> enew <CR>", "new buffer" },
     ["<leader>ch"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" },
-
-    -- latex compile
-    ["<leader>ll"] = { "<cmd> !pdflatex % <CR>", "Latex compile" },
   },
 
   t = {
