@@ -6,15 +6,13 @@ local formatting = null_ls.builtins.formatting
 -- local lint = null_ls.builtins.diagnostics
 
 local sources = {
-    formatting.latexindent,
-    formatting.rustfmt,
-    formatting.black,
-    formatting.sqlfmt,
-    formatting.clang_format.with({ extra_args = { "-style=file" } }),
-    formatting.prettier,
+  formatting.black,
+  formatting.clang_format.with { extra_args = { "-style=file" } },
+  formatting.prettier,
+  formatting.stylua,
 }
 
 null_ls.setup {
-    debug = true,
-    sources = sources,
+  debug = true,
+  sources = sources,
 }

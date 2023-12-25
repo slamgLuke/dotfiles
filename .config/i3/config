@@ -10,7 +10,7 @@ font pango:Hack 10
 
 
 # LANGUAGE: spanish
-exec setxkbmap -layout es
+exec setxkbmap -layout us -variant intl-unicode
 
 
 # Window border
@@ -27,20 +27,23 @@ focus_follows_mouse no
 
 # setting screen resolution and dpi
 exec xrandr -s 1920x1080
-exec xrandr --fbmm 307x223
+exec xrandr --fbmm 474x296
 
 # changing repeat rate (default 660/25)
-exec xset r rate 300 25
+exec xset r rate 600 25
 
+# set mouse sensitivity
+# check mouse id: xinput --list
+exec xinput --set-prop 10 'libinput Accel Speed' -0.85
 
-# AUTO STARTUP [xdg-autostart, NetworkManager, picom, polybar, nitrogen, dunst, xscreensaver]
+# AUTO STARTUP [xdg-autostart, NetworkManager, compfy, polybar, nitrogen, dunst, xscreensaver]
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id picom -cb --config ~/.config/picom/picom.conf
-exec --no-startup-id polybar -r
+exec --no-startup-id compfy 
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id dunst
 exec --no-startup-id xscreensaver --no-splash
 exec --no-startup-id redshift -r
+exec --no-startup-id polybar -r
 
 # For vscode auto login keychain fix
 exec --no-startup-id dbus-launch
@@ -102,6 +105,12 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Brightness Control
 bindsym XF86MonBrightnessUp exec brightnessctl s +5%
 bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
 
 # container focus
 bindsym $mod+h focus left

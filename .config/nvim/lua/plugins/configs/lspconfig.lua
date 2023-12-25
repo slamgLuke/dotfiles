@@ -1,5 +1,5 @@
 dofile(vim.g.base46_cache .. "lsp")
-require "nvchad_ui.lsp"
+require "nvchad.lsp"
 
 local M = {}
 local utils = require "core.utils"
@@ -7,13 +7,16 @@ local utils = require "core.utils"
 -- export on_attach & capabilities for custom lspconfigs
 
 M.on_attach = function(client, bufnr)
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
+
   utils.load_mappings("lspconfig", { buffer = bufnr })
 
   if client.server_capabilities.signatureHelpProvider then
-    require("nvchad_ui.signature").setup(client)
+    require("nvchad.signature").setup(client)
   end
 
-  if not utils.load_config().ui.lsp_semantic_tokens then
+  if not utils.load_config().ui.lsp_semantic_tokens and client.supports_method "textDocument/semanticTokens" then
     client.server_capabilities.semanticTokensProvider = nil
   end
 end
@@ -38,9 +41,9 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
-
 local lspconfig = require("lspconfig")
 
+-- lua
 lspconfig.lua_ls.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
@@ -54,7 +57,7 @@ lspconfig.lua_ls.setup {
         library = {
           [vim.fn.expand "$VIMRUNTIME/lua"] = true,
           [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-          [vim.fn.stdpath "data" .. "/lazy/extensions/nvchad_types"] = true,
+          [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
           [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
         },
         maxPreload = 100000,
@@ -64,92 +67,64 @@ lspconfig.lua_ls.setup {
   },
 }
 
--- CUSTOM
 
--- rust: rust_analyzer + rustfmt
+-- 
+-- custom
+--
+
+-- rust: rust_analyzer
 lspconfig.rust_analyzer.setup({
-    capabilities = M.capabilities,
-    on_attach = M.on_attach,
-    filetypes = {"rust"},
-    root_dir = lspconfig.util.root_pattern("Cargo.toml"),
-    settings = {
-        ["rust-analyzer"] = {
-            imports = {
-                granularity = {
-                    group = "module",
-                },
-                prefix = "self",
-            },
-            cargo = {
-                buildScripts = {
-                    enable = true,
-                },
-            },
-            procMacro = {
-                enable = true
-            },
-        }
-    },
+  capabilities = M.capabilities,
+  on_attach = M.on_attach,
+  filetypes = {"rust"},
+  root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+  settings = {
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true
+      },
+    }
+  },
 })
-
 
 -- cpp: clangd
 lspconfig.clangd.setup({
-    capabilities = M.capabilities,
-    on_attach = M.on_attach,
-    M.capabilities.offsetEncoding == {"utf16"},
-    cmd = {
-        "/home/lucas/.local/share/nvim/mason/packages/clangd/clangd_16.0.2/bin/clangd",
-        "-offset-encoding=utf-16",
-    },
+  capabilities = M.capabilities,
+  on_attach = M.on_attach,
+  M.capabilities.offsetEncoding == {"utf16"},
+  cmd = {
+    "/home/lucas/.local/share/nvim/mason/packages/clangd/clangd_17.0.3/bin/clangd",
+    "-offset-encoding=utf-16",
+  },
 })
 
-
--- webdevel: emmet_ls + rome + tailwindcss + prettier
-lspconfig.emmet_ls.setup({
-    capabilities = M.capabilities,
-    on_attach = M.on_attach,
-    filetypes = {"css", "html", "javascript", "javascriptreact", "typescriptreact"},
-    init_options = {
-      html = {
-        options = {
-          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-          ["bem.enabled"] = true,
-        },
-      },
-    }
+-- go: gopls
+lspconfig.gopls.setup({
+  capabilites = M.capabilites,
+  on_attach = M.on_attach,
 })
 
-lspconfig.rome.setup({
-    capabilities = M.capabilities,
-    on_attach = M.on_attach,
+-- js/ts/json: biome
+lspconfig.biome.setup({
+  capabilities = M.capabilites,
+  on_attach = M.on_attach,
 })
 
-lspconfig.tailwindcss.setup({
-    capabilities = M.capabilities,
-    on_attach = M.on_attach,
+-- python: ruff-lsp + black
+lspconfig.ruff_lsp.setup({
+  capabilities = M.capabilites,
+  on_attach = M.on_attach,
 })
-
-
--- python: ruff + black
-lspconfig.tailwindcss.setup({
-    capabilities = M.capabilities,
-    on_attach = M.on_attach,
-})
-
-
--- latex: texlab (lsp) + latexindent (formatter)
-lspconfig.texlab.setup({
-    capabilities = M.capabilities,
-    on_attach = M.on_attach,
-})
-
-
--- sql: sqlls
-lspconfig.sqlls.setup({
-    capabilities = M.capabilities,
-    on_attach = M.on_attach,
-})
-
 
 return M
