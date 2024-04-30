@@ -29,6 +29,11 @@ focus_follows_mouse no
 exec xrandr -s 1920x1080
 exec xrandr --fbmm 474x296
 
+# multiple monitors
+exec --no-startup-id xrandr --output HDMI-0 --auto --left-of DP-0 &
+workspace 1 output DP-0
+workspace 2 output HDMI-0
+
 # changing repeat rate (default 660/25)
 exec xset r rate 600 25
 
@@ -38,7 +43,6 @@ exec xinput --set-prop 10 'libinput Accel Speed' -0.85
 
 # AUTO STARTUP [xdg-autostart, NetworkManager, compfy, polybar, nitrogen, dunst, xscreensaver]
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id compfy 
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id dunst
 exec --no-startup-id xscreensaver --no-splash
@@ -50,6 +54,11 @@ exec --no-startup-id dbus-launch
 
 # Custom shell script for lowe battery notification
 exec ~/.config/dunst/battery-notification.sh &
+
+# compfy
+exec --no-startup-id sleep 1.5; compfy & 
+# refresh 
+
 
 # Workspace variables
 set $ws1 "1"
