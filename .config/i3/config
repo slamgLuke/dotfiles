@@ -47,7 +47,7 @@ exec --no-startup-id nitrogen --restore
 exec --no-startup-id dunst
 exec --no-startup-id xscreensaver --no-splash
 exec --no-startup-id redshift -r
-exec --no-startup-id polybar -r
+exec --no-startup-id ~/.config/polybar/launch_polybar.sh
 
 # For vscode auto login keychain fix
 exec --no-startup-id dbus-launch
